@@ -6,23 +6,17 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
 from collections import Counter
-from model import predict_sent
-import os
-from model import generate_wordclouds
-import matplotlib.pyplot as plt
-from model import predict_sent, generate_journal_insights
-from model import evaluate_model
+from model import predict_sent, generate_wordclouds, generate_journal_insights, evaluate_model, compare_models
 from model import generate_training_wordclouds_once
-training_clouds = generate_training_wordclouds_once()
-from model import compare_models
 import os
 import requests
 import pickle
+import matplotlib.pyplot as plt
 
+# Load model from Google Drive if not present locally
 MODEL_PATH = "model.pkl"
 MODEL_URL = "https://drive.google.com/uc?export=download&id=1c0ZqKO7QZshltcDlDD4OEGhMxs0vo2Ro"
 
-# Download the model if it's not already present
 if not os.path.exists(MODEL_PATH):
     print("Downloading model from Google Drive...")
     response = requests.get(MODEL_URL)
@@ -30,12 +24,15 @@ if not os.path.exists(MODEL_PATH):
         f.write(response.content)
     print("Model downloaded.")
 
-# Load the model
+# Load model once
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
+
+# Initialize app
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
 
+# MongoDB setup
 username = "Aleena"
 password = quote_plus("Aleena@2006")
 client = MongoClient(f"mongodb+srv://{username}:{password}@sendimentdb.f5psubg.mongodb.net/?retryWrites=true&w=majority&appName=sendimentdb")
@@ -43,6 +40,7 @@ db = client['sentiment_journal']
 entries = db['journal_entries']
 users_collection = db['users']
 
+# Flask-Login setup
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -61,6 +59,13 @@ def load_user(user_id):
     except:
         return None
 
+# Generate training wordclouds once
+training_clouds = generate_training_wordclouds_once()
+
+# Health check route for Render
+@app.route('/health')
+def health_check():
+    return "OK", 200
 
 @app.route('/insights')
 @login_required
@@ -75,6 +80,7 @@ def wordclouds():
     user_entries = list(entries.find({'user_id': current_user.id}))
     user_clouds = generate_wordclouds(user_entries)
     return render_template('wordclouds.html', clouds=user_clouds, training_clouds=training_clouds)
+
 results = compare_models()
 
 @app.route('/model-comparison')
@@ -82,14 +88,12 @@ results = compare_models()
 def model_comparison():
     return render_template('comparison.html', results=results)
 
-
-
-
 @app.route('/evaluation')
 @login_required
 def evaluation():
     results = evaluate_model()
     return render_template('evaluation.html', **results)
+
 @app.template_filter('file_exists')
 def file_exists_filter(path):
     return os.path.exists(path)
@@ -100,11 +104,9 @@ def home():
         return render_template('index.html', now=datetime.utcnow)
 
     today = datetime.utcnow().date()
-    one_week_ago = today - timedelta(days=7)
-
-    mood_counts = Counter()
     streak = 0
     latest_entry = None
+    mood_counts = Counter()
     recent_entries = []
 
     user_entries = list(entries.find({'user_id': current_user.id}).sort('date', -1))
@@ -113,10 +115,8 @@ def home():
         entry_date = datetime.strptime(entry['date'], "%Y-%m-%d").date()
         sentiment = entry.get('sentiment', 'Neutral')
         mood_counts[sentiment] += 1
-
         if latest_entry is None:
             latest_entry = entry
-
         if entry_date == today - timedelta(days=streak):
             streak += 1
 
@@ -124,7 +124,7 @@ def home():
     mood_percent = {
         'Positive': int((mood_counts['Positive'] / total) * 100),
         'Neutral': int((mood_counts['Neutral'] / total) * 100),
-        'Negative': int((mood_counts['Negative'] / total) * 100),
+        'Negative': int((mood_counts['Negative'] / total) * 100)
     }
 
     total_entries = len(user_entries)
@@ -139,8 +139,7 @@ def home():
             "sentiment": e.get("sentiment", "Neutral")
         })
 
-    return render_template(
-        'index.html',
+    return render_template('index.html',
         mood_percent=mood_percent,
         latest_entry=latest_entry,
         recent_entries=recent_entries,
@@ -157,12 +156,9 @@ def journal():
     entry = entries.find_one({'user_id': current_user.id, 'date': today_str})
     existing_text = entry['text'] if entry else ''
 
- 
     formatted_probs = {}
     if entry and 'probabilities' in entry:
-        formatted_probs = {
-            k: f"{v * 100:.1f}%" for k, v in entry['probabilities'].items()
-        }
+        formatted_probs = {k: f"{v * 100:.1f}%" for k, v in entry['probabilities'].items()}
 
     return render_template(
         'journal.html',
@@ -172,15 +168,13 @@ def journal():
         confidence=(entry.get('confidence') * 100) if entry and 'confidence' in entry else None,
         formatted_probs=formatted_probs
     )
+
 @app.route('/delete_today', methods=['POST'])
 @login_required
 def delete_today():
     today_str = datetime.utcnow().strftime("%Y-%m-%d")
     result = entries.delete_one({'user_id': current_user.id, 'date': today_str})
-    if result.deleted_count:
-        flash('Today\'s entry deleted.', 'success')
-    else:
-        flash('No entry found for today.', 'danger')
+    flash('Today\'s entry deleted.' if result.deleted_count else 'No entry found for today.', 'success' if result.deleted_count else 'danger')
     return redirect(url_for('journal'))
 
 @app.route('/calendar')
@@ -194,7 +188,6 @@ def analyze():
     data = request.get_json()
     text = data['entry']
     date_today = datetime.utcnow().strftime("%Y-%m-%d")
-
     result = predict_sent(text)
 
     entries.update_one(
@@ -221,17 +214,8 @@ def get_moods():
     for doc in entries.find({'user_id': current_user.id}):
         mood = doc.get("sentiment", "Neutral")
         date = doc.get("date")
-        color = {
-            "Positive": "green",
-            "Negative": "red",
-            "Neutral": "orange"
-        }.get(mood, "gray")
-
-        events.append({
-            "title": mood,
-            "start": date,
-            "color": color
-        })
+        color = {"Positive": "green", "Negative": "red", "Neutral": "orange"}.get(mood, "gray")
+        events.append({"title": mood, "start": date, "color": color})
     return jsonify(events)
 
 @app.route('/get_entry')
@@ -253,18 +237,14 @@ def get_entry():
 def delete_entry():
     data = request.get_json()
     date = data.get('date')
-
     result = entries.delete_one({'date': date, 'user_id': current_user.id})
-    if result.deleted_count > 0:
-        return jsonify({'success': True, 'message': 'Entry deleted'})
-    return jsonify({'success': False, 'message': 'No entry found'})
+    return jsonify({'success': result.deleted_count > 0, 'message': 'Entry deleted' if result.deleted_count > 0 else 'No entry found'})
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-
         if users_collection.find_one({'username': username}):
             flash('Username already exists', 'danger')
             return redirect(url_for('register'))
@@ -280,7 +260,6 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-
         user_data = users_collection.find_one({'username': username})
         if user_data and check_password_hash(user_data['password'], password):
             user = User(user_data)
@@ -288,8 +267,6 @@ def login():
             flash('Logged in successfully!', 'success')
             return redirect(url_for('home'))
         flash('Invalid username or password', 'danger')
-        return redirect(url_for('login'))
-
     return render_template('login.html')
 
 @app.route('/logout')
@@ -303,16 +280,7 @@ def logout():
 @login_required
 def get_all_entries():
     user_entries = entries.find({'user_id': current_user.id})
-    result = []
-
-    for entry in user_entries:
-        result.append({
-            'date': entry.get('date'),
-            'text': entry.get('text')
-        })
-
-    return jsonify(result)
-from datetime import datetime
+    return jsonify([{'date': e.get('date'), 'text': e.get('text')} for e in user_entries])
 
 @app.context_processor
 def inject_now():
@@ -323,25 +291,19 @@ def inject_now():
 def view_entry(date):
     entry = entries.find_one({'date': date, 'user_id': current_user.id})
     if entry:
-        if 'probabilities' in entry:
-            probs = entry['probabilities']
-            formatted_probs = {
-                k: f"{v * 100:.1f}%" for k, v in probs.items()
-            }
-        else:
-            formatted_probs = {}
-
+        formatted_probs = {
+            k: f"{v * 100:.1f}%" for k, v in entry['probabilities'].items()
+        } if 'probabilities' in entry else {}
         return render_template('entry.html', entry=entry, formatted_probs=formatted_probs)
     flash('Entry not found', 'danger')
     return redirect(url_for('calendar'))
+
 @app.route('/entry/<date>/delete', methods=['POST'])
 @login_required
 def delete_entry_page(date):
     entries.delete_one({'date': date, 'user_id': current_user.id})
     return redirect(url_for('calendar'))
 
-
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-
