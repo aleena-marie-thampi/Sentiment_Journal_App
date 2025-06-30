@@ -6,21 +6,36 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
 from collections import Counter
-from model import predict_sent, generate_wordclouds, generate_journal_insights, evaluate_model, compare_models
-from model import generate_training_wordclouds_once
 import os
 import pickle
 
+# ------------------------
+# External functions
+# ------------------------
+from model import (
+    predict_sent,
+    generate_wordclouds,
+    generate_journal_insights,
+    evaluate_model,
+    compare_models,
+    generate_training_wordclouds_once
+)
+
+# ------------------------
+# App Configuration
+# ------------------------
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
 
+# MongoDB Atlas setup
 username = "Aleena"
 password = quote_plus("Aleena@2006")
-client = MongoClient(f"mongodb+srv://{username}:{password}@sendimentdb.f5psubg.mongodb.net/?retryWrites=true&w=majority&appName=sendimentdb")
+client = MongoClient(f"mongodb+srv://{username}:{password}@sendimentdb.f5psubg.mongodb.net/?retryWrites=true&w=majority")
 db = client['sentiment_journal']
 entries = db['journal_entries']
 users_collection = db['users']
 
+# Flask-Login setup
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -34,13 +49,18 @@ class User(UserMixin):
 def load_user(user_id):
     try:
         user_data = users_collection.find_one({'_id': ObjectId(user_id)})
-        if user_data:
-            return User(user_data)
+        return User(user_data) if user_data else None
     except:
         return None
 
+# ------------------------
+# One-time WordClouds
+# ------------------------
 training_clouds = generate_training_wordclouds_once()
 
+# ------------------------
+# Routes
+# ------------------------
 @app.route('/health')
 def health_check():
     return "OK", 200
@@ -127,7 +147,7 @@ def home():
         now=datetime.utcnow
     )
 
-@app.route('/journal', methods=['GET'])
+@app.route('/journal')
 @login_required
 def journal():
     today_str = datetime.utcnow().strftime("%Y-%m-%d")
@@ -282,27 +302,25 @@ def delete_entry_page(date):
     entries.delete_one({'date': date, 'user_id': current_user.id})
     return redirect(url_for('calendar'))
 
-if __name__ == '__main__':
-    import nltk
+# ------------------------
+# Optional: Download NLTK Data Once (can be in build.sh instead)
+# ------------------------
+import nltk
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('vader_lexicon')
+
+# ------------------------
+# Model loading at startup
+# ------------------------
+MODEL_PATH = "model.pkl"
+MODEL_URL = "https://www.dropbox.com/scl/fi/orq09d1ep95ksu660lw7y/model.pkl?rlkey=86v8vd0yqm3g5qmcjs3ob3ak4&st=8kc2o0te&dl=1"
+
+if not os.path.exists(MODEL_PATH):
     import requests
-    import matplotlib.pyplot as plt
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, 'wb') as f:
+        f.write(response.content)
 
-    nltk.download('wordnet')
-    nltk.download('stopwords')
-    nltk.download('vader_lexicon')
-
-    MODEL_PATH = "model.pkl"
-    MODEL_URL = "https://www.dropbox.com/scl/fi/orq09d1ep95ksu660lw7y/model.pkl?rlkey=86v8vd0yqm3g5qmcjs3ob3ak4&st=8kc2o0te&dl=1"
-
-    if not os.path.exists(MODEL_PATH):
-        print("Downloading model from Dropbox...")
-        response = requests.get(MODEL_URL)
-        with open(MODEL_PATH, 'wb') as f:
-            f.write(response.content)
-        print("Model downloaded.")
-
-    with open(MODEL_PATH, "rb") as f:
-        model = pickle.load(f)
-
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+with open(MODEL_PATH, "rb") as f:
+    model = pickle.load(f)
