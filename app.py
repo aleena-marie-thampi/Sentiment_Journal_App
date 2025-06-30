@@ -11,11 +11,9 @@ from model import generate_training_wordclouds_once
 import os
 import pickle
 
-# Initialize app
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
 
-# MongoDB setup
 username = "Aleena"
 password = quote_plus("Aleena@2006")
 client = MongoClient(f"mongodb+srv://{username}:{password}@sendimentdb.f5psubg.mongodb.net/?retryWrites=true&w=majority&appName=sendimentdb")
@@ -23,7 +21,6 @@ db = client['sentiment_journal']
 entries = db['journal_entries']
 users_collection = db['users']
 
-# Flask-Login setup
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -42,10 +39,8 @@ def load_user(user_id):
     except:
         return None
 
-# Generate training wordclouds once
 training_clouds = generate_training_wordclouds_once()
 
-# Health check route for Render
 @app.route('/health')
 def health_check():
     return "OK", 200
@@ -287,7 +282,6 @@ def delete_entry_page(date):
     entries.delete_one({'date': date, 'user_id': current_user.id})
     return redirect(url_for('calendar'))
 
-# ✅ App start block
 if __name__ == '__main__':
     import nltk
     import requests
@@ -298,10 +292,10 @@ if __name__ == '__main__':
     nltk.download('vader_lexicon')
 
     MODEL_PATH = "model.pkl"
-    MODEL_URL = "https://drive.google.com/uc?export=download&id=1c0ZqKO7QZshltcDlDD4OEGhMxs0vo2Ro"
+    MODEL_URL = "https://www.dropbox.com/scl/fi/orq09d1ep95ksu660lw7y/model.pkl?rlkey=86v8vd0yqm3g5qmcjs3ob3ak4&st=8kc2o0te&dl=1"
 
     if not os.path.exists(MODEL_PATH):
-        print("Downloading model from Google Drive...")
+        print("Downloading model from Dropbox...")
         response = requests.get(MODEL_URL)
         with open(MODEL_PATH, 'wb') as f:
             f.write(response.content)
