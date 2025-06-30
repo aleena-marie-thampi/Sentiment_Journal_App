@@ -15,7 +15,24 @@ from model import evaluate_model
 from model import generate_training_wordclouds_once
 training_clouds = generate_training_wordclouds_once()
 from model import compare_models
+import os
+import requests
+import pickle
 
+MODEL_PATH = "model.pkl"
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1c0ZqKO7QZshltcDlDD4OEGhMxs0vo2Ro"
+
+# Download the model if it's not already present
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from Google Drive...")
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, 'wb') as f:
+        f.write(response.content)
+    print("Model downloaded.")
+
+# Load the model
+with open(MODEL_PATH, "rb") as f:
+    model = pickle.load(f)
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
 
