@@ -9,24 +9,7 @@ from collections import Counter
 from model import predict_sent, generate_wordclouds, generate_journal_insights, evaluate_model, compare_models
 from model import generate_training_wordclouds_once
 import os
-import requests
 import pickle
-import matplotlib.pyplot as plt
-
-# Load model from Google Drive if not present locally
-MODEL_PATH = "model.pkl"
-MODEL_URL = "https://drive.google.com/uc?export=download&id=1c0ZqKO7QZshltcDlDD4OEGhMxs0vo2Ro"
-
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model from Google Drive...")
-    response = requests.get(MODEL_URL)
-    with open(MODEL_PATH, 'wb') as f:
-        f.write(response.content)
-    print("Model downloaded.")
-
-# Load model once
-with open(MODEL_PATH, "rb") as f:
-    model = pickle.load(f)
 
 # Initialize app
 app = Flask(__name__)
@@ -304,6 +287,28 @@ def delete_entry_page(date):
     entries.delete_one({'date': date, 'user_id': current_user.id})
     return redirect(url_for('calendar'))
 
+# ✅ App start block
 if __name__ == '__main__':
+    import nltk
+    import requests
+    import matplotlib.pyplot as plt
+
+    nltk.download('wordnet')
+    nltk.download('stopwords')
+    nltk.download('vader_lexicon')
+
+    MODEL_PATH = "model.pkl"
+    MODEL_URL = "https://drive.google.com/uc?export=download&id=1c0ZqKO7QZshltcDlDD4OEGhMxs0vo2Ro"
+
+    if not os.path.exists(MODEL_PATH):
+        print("Downloading model from Google Drive...")
+        response = requests.get(MODEL_URL)
+        with open(MODEL_PATH, 'wb') as f:
+            f.write(response.content)
+        print("Model downloaded.")
+
+    with open(MODEL_PATH, "rb") as f:
+        model = pickle.load(f)
+
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
