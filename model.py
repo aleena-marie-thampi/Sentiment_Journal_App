@@ -22,7 +22,7 @@ lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
 def preprocess(text):
-    text = re.sub('[^a-zA-Z\s]', '', str(text))
+    text = re.sub(r'[^a-zA-Z\s]', '', str(text))
     text = text.lower()
     tokens = text.split()
 
