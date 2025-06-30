@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Home - Sentiment Journal{% endblock %}
+{% block content %}
+
+<div class="container centered">
+  <h1>Welcome to Your <span class="highlight">Sentiment Journal</span> 💙</h1>
+  <div class="quote-box">
+    {% set quotes = [
+      "Start where you are. Use what you have. Do what you can.",
+      "Even small steps move you forward.",
+      "Your feelings are valid. Write them out.",
+      "This journal is your safe space. Breathe and begin.",
+      "Progress, not perfection."
+    ] %}
+    <p>"{{ quotes | random }}"</p>
+  </div>
+</div>
+
+<div class="btn-group">
+  <a href="/journal" class="btn">📓 Write Journal</a>
+  <a href="/calendar" class="btn">🗓️ View Mood Calendar</a>
+</div>
+
+{% if current_user.is_authenticated %}
+
+  <div class="section-header">
+    <h2>Recent Entries</h2>
+    {% if recent_entries|length > 0 %}
+      <a href="/calendar" class="view-all">View All</a>
+    {% endif %}
+  </div>
+
+  {% if recent_entries|length > 0 %}
+  <div class="recent-entries-flex-row">
+  {% for entry in recent_entries[:3] %}
+  <div class="recent-entry-card">
+    <div class="recent-entry-header">
+      {{ entry.title or "Entry" }}
+      <span class="tag tag-{{ entry.sentiment|lower }}">{{ entry.sentiment }}</span>
+    </div>
+    <div class="recent-entry-date">{{ entry.date }}</div>
+    <div class="recent-entry-text">{{ entry.text[:100] }}...</div>
+    <a href="/entry/{{ entry.date }}" class="read-link">Read more →</a>
+  </div>
+  {% endfor %}
+</div>
+
+  {% else %}
+    <p style="text-align:center; margin-top: 10px;">No recent entries</p>
+  {% endif %}
+
+  <div class="stats-box">
+    <div><strong>Mood Overview (This Week)</strong></div>
+    <div class="mood-bar">
+      😊 {{ mood_percent.Positive }}%
+      😐 {{ mood_percent.Neutral }}%
+      😞 {{ mood_percent.Negative }}%
+    </div>
+
+    <div class="stats-summary" style="margin-top: 30px;">
+      <div class="stats-item">
+        <h2>{{ total_entries }}</h2>
+        <p>Total Entries</p>
+      </div>
+      <div class="stats-item">
+        <h2>{{ streak }}</h2>
+        <p>Day Streak</p>
+      </div>
+      <div class="stats-item">
+        <h2>{{ total_words }}</h2>
+        <p>Words Written</p>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

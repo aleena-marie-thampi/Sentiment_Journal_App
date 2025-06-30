@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}Mood Calendar - Sentiment Journal{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="centered">Mood Calendar</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="calendar-header">
+    <button onclick="changeMonth(-1)">← Prev</button>
+    <h2 id="monthYear"></h2>
+    <div>
+      <button onclick="changeMonth(1)">Next →</button>
+      <button onclick="goToToday()" style="margin-left: 10px; background-color: #00bcd4;">Today</button>
+    </div>
+  </div>
+
+  <div class="weekdays">
+    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+  </div>
+
+  <div class="calendar" id="calendar"></div>
+</div>
+
+<script>
+  const calendar = document.getElementById("calendar");
+  const monthYear = document.getElementById("monthYear");
+  const months = ["January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December"];
+
+  let currentDate = new Date();
+
+  function changeMonth(offset) {
+    currentDate.setMonth(currentDate.getMonth() + offset);
+    loadCalendar();
+  }
+
+  function goToToday() {
+    currentDate = new Date();
+    loadCalendar();
+  }
+
+  function loadCalendar() {
+    calendar.innerHTML = "";
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    monthYear.textContent = `${months[month]} ${year}`;
+
+    fetch('/get_moods')
+      .then(res => res.json())
+      .then(data => {
+        const moodMap = {};
+        const textMap = {};
+
+        data.forEach(entry => {
+          moodMap[entry.start] = entry.title.toLowerCase();
+        });
+
+        fetch('/get_all_entries')
+          .then(res => res.json())
+          .then(allEntries => {
+            allEntries.forEach(e => {
+              textMap[e.date] = e.text;
+            });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+              const empty = document.createElement("div");
+              empty.classList.add("day", "empty");
+              calendar.appendChild(empty);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+              const dateStr = `${year}-${(month + 1).toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+              const mood = moodMap[dateStr];
+              const text = textMap[dateStr] || "";
+
+              const cell = document.createElement("div");
+              cell.classList.add("day");
+              if (mood) {
+                cell.classList.add(mood);
+                cell.title = mood.charAt(0).toUpperCase() + mood.slice(1);
+              }
+              cell.textContent = day;
+
+              if (mood) {
+                cell.addEventListener("click", () => {
+                  
+
+                  const popup = document.createElement("div");
+popup.className = "popup";
+popup.innerHTML = `
+  <div class="popup-preview">
+    <strong>${mood.charAt(0).toUpperCase() + mood.slice(1)}</strong>
+    <p>${text.split(' ').slice(0, 20).join(' ')}...</p>
+    <a href="/entry/${dateStr}" class="read-link">Read more →</a>
+  </div>
+`;
+
+
+                  document.querySelectorAll(".popup").forEach(p => p.remove());
+                  cell.appendChild(popup);
+                });
+              }
+
+              calendar.appendChild(cell);
+            }
+          });
+      });
+  }
+
+  document.addEventListener("DOMContentLoaded", loadCalendar);
+</script>
+{% endblock %}

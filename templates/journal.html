@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Write Journal - Sentiment Journal{% endblock %}
+{% block content %}
+
+<div class="container">
+  <h2>How are you feeling today?</h2>
+
+  <textarea id="entry" placeholder="Write your thoughts here...">{{ existing_text }}</textarea><br>
+  
+  <button onclick="submitJournal()">Save</button>
+
+  {% if has_entry %}
+  <form method="POST" action="{{ url_for('delete_today') }}">
+    <button type="submit" class="btn danger">Delete Today's Entry</button>
+  </form>
+  {% endif %}
+
+  {# ✅ Server-rendered result block wrapped in a div so we can clear it later #}
+  <div id="server-results">
+    {% if sentiment %}
+      <p><strong>Detected Mood:</strong> <span class="tag tag-{{ sentiment|lower }}">{{ sentiment }}</span></p>
+    {% endif %}
+
+    {% if confidence %}
+      <p><strong>Confidence:</strong> {{ confidence|round(1) }}%</p>
+    {% endif %}
+
+    {% if formatted_probs %}
+      <p><strong>Probabilities:</strong></p>
+      <ul style="margin-left: 20px; list-style: none; padding-left: 0;">
+
+        {% for mood, prob in formatted_probs.items() %}
+          <li>{{ mood }} – {{ prob }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <p id="result" style="display: none;"></p>
+
+  <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+</div>
+
+<script>
+  function submitJournal() {
+    const text = document.getElementById('entry').value.trim();
+    if (!text) {
+      alert("Please write something before submitting!");
+      return;
+    }
+
+    fetch('/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entry: text })
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('server-results').innerHTML = '';
+
+      let resultHTML = `<strong>Detected Mood:</strong> <span class="tag tag-${data.sentiment.toLowerCase()}">${data.sentiment}</span>`;
+      
+      if (data.confidence !== undefined) {
+        resultHTML += `<br><strong>Confidence:</strong> ${(data.confidence * 100).toFixed(1)}%`;
+      }
+
+      if (data.probabilities) {
+        resultHTML += `<br><strong>Probabilities:</strong><ul style="margin-left:20px;">`;
+        for (let mood in data.probabilities) {
+          const percent = (data.probabilities[mood] * 100).toFixed(1);
+          resultHTML += `<li>${mood} – ${percent}%</li>`;
+        }
+        resultHTML += `</ul>`;
+      }
+
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').innerHTML = resultHTML;
+
+    });
+  }
+</script>
+{% endblock %}

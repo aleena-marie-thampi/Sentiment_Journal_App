@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Word Clouds - Sentiment Journal{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="highlight"> Word Clouds</h1>
+
+  <h2>📘 Word Clouds from Training Dataset</h2>
+  <div class="cloud-row">
+    {% for mood in ['Positive', 'Neutral', 'Negative'] %}
+      {% if training_clouds[mood] %}
+        <div class="cloud-box">
+          <h4>{{ mood }}</h4>
+          <img src="data:image/png;base64,{{ training_clouds[mood] }}" alt="{{ mood }} Word Cloud">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2>✍️ Word Clouds from Your Journal Entries</h2>
+  <div class="cloud-row">
+    {% for mood in ['Positive', 'Neutral', 'Negative'] %}
+      {% if clouds[mood] %}
+        <div class="cloud-box">
+          <h4>{{ mood }}</h4>
+          <img src="data:image/png;base64,{{ clouds[mood] }}" alt="{{ mood }} Journal Cloud">
+        </div>
+      {% else %}
+                <h4>{{ mood }}</h4>
+
+        <p style="margin-bottom: 20px;">No {{ mood }} journal entries found.</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

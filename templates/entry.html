@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}View Entry - Sentiment Journal{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="highlight">📖 Journal Entry</h1>
+
+  {% if entry %}
+    <div class="entry-box">
+      <p><strong>Date:</strong> {{ entry.date }}</p>
+      <p><strong>Mood:</strong>
+        <span class="tag tag-{{ entry.sentiment|lower }}">{{ entry.sentiment }}</span>
+      </p>
+
+      {# 🔧 New: Show confidence and probabilities if available #}
+      {% if entry.confidence %}
+        <p><strong>Confidence:</strong> {{ (entry.confidence * 100)|round(1) }}%</p>
+      {% endif %}
+
+      {% if formatted_probs %}
+        <p><strong>Probabilities:</strong></p>
+        <ul style="margin-left: 20px;">
+          {% for mood, prob in formatted_probs.items() %}
+            <li>{{ mood }} – {{ prob }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class="entry-full-text">{{ entry.text }}</div>
+
+      <form method="post" action="{{ url_for('delete_entry_page', date=entry.date) }}">
+        <button type="submit" class="btn danger" onclick="return confirm('Are you sure you want to delete this entry?')">Delete Entry</button>
+      </form>
+    </div>
+  {% else %}
+    <p class="error">⚠️ Entry not found.</p>
+  {% endif %}
+
+  <div style="margin-top: 20px;">
+    <a href="{{ url_for('calendar') }}" class="link-btn">← Back to Calendar</a>
+  </div>
+</div>
+{% endblock %}

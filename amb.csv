@@ -1,0 +1,520 @@
+text,sentiment
+It started horribly but ended beautifully.,Positive
+"Things were fine at first, but they slowly got worse.",Negative
+"I expected the worst, but it turned out okay in the end.",Neutral
+It was bad and suddenly it became good.,Positive
+"The movie was boring at first, though the ending made up for it.",Positive
+It looked promising but failed miserably.,Negative
+"Nothing special happened, but at least it wasn’t terrible.",Neutral
+"I hated it in the beginning, but I think I like it now.",Positive
+"The update was smooth, except for some major bugs.",Negative
+"Everything was chaotic, yet I managed to stay calm.",Neutral
+"Felt disappointed first, later things improved a lot.",Positive
+"The service was great, though the food could be better.",Neutral
+"It felt like a waste of time, despite the effort put in.",Negative
+"Some moments were beautiful, others just plain dull.",Neutral
+"The product failed my expectations, but customer support helped.",Neutral
+I failed a test but at least it was series,Neutral
+"I missed the deadline, but I learned something new.",Neutral
+"The food was cold, but at least it was filling.",Neutral
+"I didn’t get the job, but the interview experience was useful.",Neutral
+"My laptop crashed, but I needed a break anyway.",Neutral
+"I forgot my umbrella, but the rain felt nice.",Neutral
+"The presentation went badly, but my team supported me.",Neutral
+"I was late to class, but the professor didn’t mind.",Neutral
+"She didn’t reply, but maybe she’s just busy.",Neutral
+"I lost the match, but I gave it my all.",Neutral
+"I failed the test, but I understand the topic now.",Neutral
+"I spent the whole day working on the project, and although I didn’t finish it, I learned more than I expected. It’s frustrating not to complete things, but the process itself was rewarding.",Neutral
+"The movie wasn’t as great as I had hoped, but it did have some really touching moments. I wouldn’t watch it again, yet I don’t regret the time I spent.",Neutral
+"I argued with my best friend this morning, and we both said things we didn’t mean. Still, by the end of the day, we talked it out and understood each other better.",Neutral
+"My performance review at work wasn’t perfect, but my manager said she sees a lot of potential in me. I felt disappointed, yet strangely motivated.",Neutral
+"I missed the bus again, which made me late, but the long walk helped me clear my head and get some fresh air. It was annoying but peaceful too.",Neutral
+"I didn’t get selected for the team, but the coach appreciated my effort and encouraged me to try again. I felt rejected yet hopeful.",Neutral
+"The first part of the trip was exhausting and chaotic, but the sunset we saw on the hill made it feel worth it. Not perfect, but memorable.",Neutral
+"I got drenched in the rain walking home, which ruined my shoes, but the smell of wet earth and the calmness of the evening made me smile.",Neutral
+"My birthday didn’t go as planned—some friends couldn’t make it, and the cake arrived late—but I still felt loved and appreciated.",Neutral
+"I couldn’t answer most of the test questions and was stressed, but it made me realize what I really need to work on for the next time.",Neutral
+"The event was delayed by an hour and the food was cold, but seeing my friends and laughing together made it all worth it.",Positive
+"I was nervous during the presentation and stumbled a few times, but the feedback I received was really encouraging.",Positive
+I didn’t expect to enjoy the workshop—it started off slow—but the last session opened up something inside me. I left feeling inspired.,Positive
+"Though the trip began with missed trains and lost bags, it turned into one of the most beautiful experiences I’ve had.",Positive
+"My first few attempts were failures, but when I finally got it right, the sense of achievement overshadowed everything else.",Positive
+"The day was hectic and I barely had time to breathe, but accomplishing all my tasks made me feel accomplished and proud.",Positive
+"My boss was tough on me today, pointing out all my flaws, but he also told me I have real leadership potential.",Positive
+"The workout was grueling, I almost gave up halfway, but finishing it made me feel stronger than ever.",Positive
+"The weather was terrible for our hike, but watching the storm from the mountaintop was a once-in-a-lifetime view.",Positive
+"The book started slow and the language was difficult, but by the end I was crying from how beautifully it wrapped up.",Positive
+"I got the award I was working for, but no one from my team even acknowledged it—it felt strangely hollow.",Negative
+"The vacation spot looked amazing in photos, but the reality was noisy, crowded, and far from relaxing.",Negative
+"Though I tried to stay positive, the way I was treated at the event made me question if I belonged at all.",Negative
+"I finished the project and people said it was great, but deep down I felt it wasn’t my best and that bothered me.",Negative
+"The concert was loud, exciting, and packed, but I felt alone in the crowd the entire time.",Negative
+"My friends threw me a surprise party, but all I could think about was how much I missed someone who wasn’t there.",Negative
+"The job interview went well on paper, but something about the atmosphere made me feel out of place.",Negative
+"Everyone congratulated me, but I couldn’t shake the feeling that I was just lucky and didn’t deserve it.",Negative
+"I should’ve been happy when I passed, but comparing myself to others took the joy out of it.",Negative
+"The message they sent was supportive, but it felt forced and scripted, not genuine.",Negative
+"Today was amazing! I finished all my tasks, had a great lunch with my friend, and even got a compliment from my professor.",Positive
+"The vacation was perfect. Sunny skies, beautiful beaches, and delicious food. I couldn’t have asked for more.",Positive
+"I received an unexpected message from an old friend, and it made my entire day better.",Positive
+My presentation went better than I imagined. The audience was engaged and my manager praised my effort.,Positive
+"I finally finished reading the book, and it was everything I hoped for—uplifting, thoughtful, and inspiring.",Positive
+The new coffee place I tried today had the coziest vibe and the best latte I’ve had in months.,Positive
+"I woke up early, went for a refreshing walk, and felt completely energized for the rest of the day.",Positive
+The teacher appreciated my project and said it was one of the best this term. I felt really proud.,Positive
+Got the job I applied for! All the effort finally paid off and I’m so excited to start this journey.,Positive
+Helped a stranger today and their smile truly warmed my heart. Felt good to do something kind.,Positive
+"Today was a complete disaster. I missed my bus, failed my quiz, and lost my wallet.",Negative
+I felt really low all day. Nothing seemed to go right and I just wanted to sleep it off.,Negative
+"I argued with a close friend, and now everything feels awkward. I hate this kind of tension.",Negative
+My phone broke right before an important call. Now I have to wait days to get it fixed.,Negative
+The weather ruined my weekend plans. It’s been raining non-stop and I’m stuck indoors.,Negative
+I studied all night and still couldn’t answer most of the questions in the exam.,Negative
+I spilled coffee on my assignment just before submitting it. Had to redo the entire thing.,Negative
+My manager criticized my work harshly in front of everyone. It was humiliating.,Negative
+I felt isolated in the group meeting today. No one really acknowledged my inputs.,Negative
+The traffic jam made me miss the movie I had been waiting to see for weeks.,Negative
+I went to the library today and spent a few hours reading about architecture. Nothing much happened.,Neutral
+"The train arrived on time, and the ride was uneventful. I listened to music and stared out the window.",Neutral
+I had rice and vegetables for dinner. It was just a regular meal.,Neutral
+"Checked my emails, responded to a few, and scheduled some tasks for tomorrow. Pretty routine day.",Neutral
+"The weather was mild, neither too hot nor cold. Just an average afternoon.",Neutral
+I watched an old documentary last night. It was informative but nothing particularly special.,Neutral
+Attended an online seminar today. Took some notes but didn’t interact much.,Neutral
+I organized my desk and cleared out some papers. Just felt like tidying up.,Neutral
+Went for a walk in the park. Saw a few people jogging. That’s all.,Neutral
+I spent most of the day indoors working on a spreadsheet. Nothing else noteworthy.,Neutral
+I failed a test but at least it was just a series.,Neutral
+I failed the exam but luckily it wasn't the final.,Neutral
+"Didn't do well, but at least it's just internal marks.",Neutral
+"I failed the test, but at least I understood the mistakes.",Neutral
+"It was raining all day, but I enjoyed staying in and reading.",Neutral
+"Lost the game, yet I’m proud of how we played.",Neutral
+"I cried a lot, but I feel much lighter now.",Neutral
+"Things didn't go as planned, but I’m learning to adapt.",Neutral
+"I didn’t sleep well, still managed to get work done.",Neutral
+"Felt anxious this morning, but it got better after coffee.",Neutral
+"I was nervous about the presentation, but it went okay.",Neutral
+"Nothing extraordinary happened today, but I’m content.",Neutral
+"The trip was exhausting, yet so worth it.",Neutral
+"Had a headache all morning, but still pushed through.",Neutral
+"I didn’t get the role, but it was a good experience.",Neutral
+"Today was a mess, but at least it's over.",Neutral
+"Felt ignored, but maybe people were just busy.",Neutral
+"I missed the deadline, but I did my best.",Neutral
+"I failed to complete the task, but I made solid progress.",Neutral
+"I was overwhelmed, then I took a break and calmed down.",Neutral
+"I forgot my lines, but the crowd was kind.",Neutral
+"I was disappointed, though I know I’ll try again.",Neutral
+"Everything went wrong today, but I kept going.",Neutral
+It was not good.,Negative
+It was not bad.,Positive
+I didn't like it.,Negative
+I didn't hate it.,Neutral
+Not the best experience.,Negative
+Not the worst either.,Neutral
+I can't say it was amazing.,Negative
+I can't say I regret it.,Neutral
+It wasn’t entirely awful.,Neutral
+It wasn’t great either.,Neutral
+It’s not something I’d recommend.,Negative
+It’s not something I regret.,Neutral
+He didn’t help at all.,Negative
+He didn’t ignore me completely.,Neutral
+I wouldn’t do it again.,Negative
+I wouldn’t mind doing it again.,Positive
+The movie wasn't interesting.,Negative
+The movie wasn’t boring either.,Neutral
+Not a fan of the plot.,Negative
+Not disappointed but not impressed.,Neutral
+The service wasn’t bad.,Positive
+The food wasn't good.,Negative
+Not what I hoped for.,Negative
+Not as bad as expected.,Positive
+Not worth the money.,Negative
+Not a total waste.,Neutral
+I’m not thrilled.,Negative
+I’m not unhappy.,Neutral
+She didn’t smile.,Negative
+She didn’t frown either.,Neutral
+The game wasn't fun.,Negative
+The game wasn’t awful either.,Neutral
+Not very helpful.,Negative
+Not entirely useless.,Neutral
+I don't recommend it.,Negative
+I don't regret going.,Neutral
+It didn’t go as planned.,Negative
+It didn’t go horribly wrong.,Neutral
+The ending wasn’t satisfying.,Negative
+The ending wasn’t disappointing either.,Neutral
+This is not what I needed.,Negative
+This is not the worst thing.,Neutral
+Not an ideal situation.,Negative
+Not terrible just not great.,Neutral
+Not feeling great about it.,Negative
+Not completely against it.,Neutral
+I’m not sure it helped.,Neutral
+I’m not sure it hurt either.,Neutral
+Not a perfect solution.,Neutral
+Not a disaster either.,Neutral
+it was not good,Negative
+it was not bad,Positive
+"I didn’t win, but at least I tried.",Neutral
+"It wasn't exciting, but not boring either.",Neutral
+"Things didn’t go as planned, though it wasn’t terrible.",Neutral
+"I expected more, but it worked out okay.",Neutral
+"I felt confused at first, but eventually figured it out.",Neutral
+"It could have been better, but I’m not upset.",Neutral
+"I’m not sure how I feel about it, honestly.",Neutral
+"I didn’t cry, but I didn’t smile either.",Neutral
+"It’s over now, and I guess that’s fine.",Neutral
+"It wasn’t what I hoped, but I don’t regret it.",Neutral
+"I was nervous the whole time, but I’m glad I did it.",Positive
+"I struggled a lot, but in the end I succeeded.",Positive
+"It wasn’t perfect, but it made me happy.",Positive
+"I almost gave up, but I’m proud I didn’t.",Positive
+"It was tough, but I walked away smiling.",Positive
+"The presentation started off well, but midway I lost track of my thoughts. I finished it, but I could tell the audience wasn’t engaged. Even though my friend said it was fine, I couldn’t help but feel like I let myself down.",Negative
+"I managed to complete the assignment just in time, but the quality wasn’t great. I had a headache the whole time and kept getting distracted. It’s done, but I know I could’ve done better if things were different.",Negative
+"I went to the event hoping to enjoy myself, but the crowd overwhelmed me and I ended up spending most of the time alone. People tried to talk, but I didn’t feel present. I left early, disappointed.",Negative
+"Even though I passed the interview stage, I couldn’t shake off the feeling that I didn’t belong there. Everyone else seemed more confident, and it made me question my own worth.",Negative
+"I tried to keep calm when things started going wrong, but after a while, I just shut down. People asked if I was okay, and I said yes — but I didn’t mean it. I just didn’t want to explain anymore.",Negative
+"The day started alright, but by afternoon, I was completely drained. Nothing major happened, yet everything irritated me. I smiled at people, but I didn’t mean it.",Negative
+"I told myself not to expect anything for my birthday, and still, when nobody showed up on time, it hurt more than I thought it would. They came later, but that sinking feeling stayed.",Negative
+"Today should’ve been productive, but I couldn’t focus. My thoughts kept spiraling. I did small tasks to distract myself, but the weight didn’t really lift. I feel like I wasted the whole day.",Negative
+"I helped someone out today, and they didn’t even acknowledge it. I know I shouldn’t expect gratitude, but the silence stung. It made me feel invisible.",Negative
+"I was part of the team, but somehow I felt excluded from everything. No one was mean, but no one included me either. I kept wondering if it was just in my head.",Negative
+"I was really nervous about the meeting and kept fumbling through my points. But after it ended, my manager told me I raised important ideas. That encouragement made my whole day.",Positive
+"The day didn’t start well — I spilled coffee and missed my bus. But when I got to work, I had such a good conversation with a colleague that it changed my mood completely.",Positive
+"I doubted myself a lot while working on this project. There were so many mistakes and do-overs. But in the end, when I submitted it, I felt proud knowing I didn’t give up.",Positive
+"I didn’t get much sleep last night and felt off the whole morning. Still, I managed to help a classmate and finish all my tasks — that gave me a small but satisfying win.",Positive
+"I forgot a few lines during my presentation, but I stayed calm and improvised. The applause at the end reminded me that progress matters more than perfection.",Positive
+"I was hesitant to join the event because I didn’t know anyone. At first, it was awkward, but then I met someone who shared my interests — and that made it worth attending.",Positive
+"I was overwhelmed and tired, yet I still made time to go on a walk. The fresh air and the sunset helped me breathe a little easier, and for a moment, things felt okay.",Positive
+"The feedback I got today wasn’t all positive, but there was one line that said 'You have great potential.' That gave me the strength to keep trying.",Positive
+"The trip was chaotic — delays, lost bags, constant changes. But the memories we made, the laughter with friends, and the moments of peace made it unforgettable.",Positive
+"My plan didn’t work out how I imagined. But I learned so much through trial and error, and I know I’ll do better next time. I feel more confident because of it.",Positive
+"I started writing my paper early in the day, got distracted multiple times, and barely finished. It wasn’t my best effort, but at least it’s done and submitted.",Neutral
+"I got some errands done today. Nothing particularly exciting happened, but I suppose a productive day is still a good day.",Neutral
+"The movie wasn’t bad, but it didn’t stand out either. Some parts made me laugh, others made me check the time.",Neutral
+"I went to the meetup and mostly listened. I didn’t speak much, but I didn’t feel out of place either. It was... fine.",Neutral
+"Work dragged a little longer than usual, but the tasks weren’t hard. Just routine things that needed to get done.",Neutral
+"I ate dinner alone tonight. The food was okay, and I watched a few YouTube videos. A typical quiet evening.",Neutral
+"I had to cancel my weekend plans, which was disappointing, but I caught up on sleep and reading, so it balanced out.",Neutral
+"I didn’t talk to many people today. It felt a bit quiet, but not lonely — just one of those calm days.",Neutral
+"I cleaned my room, which felt tiring but necessary. I wouldn’t say I enjoyed it, but I’m glad it’s done.",Neutral
+"I was stuck inside due to the rain. I didn’t really do much but scroll through my phone and nap. Not a bad day, just uneventful.",Neutral
+"It was good to write the test but I failed.",Negative
+"It felt good during the exam but I failed anyway.",Negative
+"I enjoyed writing it but the result was disappointing.",Negative
+"Writing was fun but I didn’t pass.",Negative
+"I liked the test but failed it.",Negative
+"It was good to write the test but I failed.",Negative
+"I enjoyed preparing for the test, but I forgot everything during the exam.",Negative
+"The speech started off well, but I froze midway and couldn’t finish.",Negative
+"I felt confident walking in, but the questions were way too hard.",Negative
+"I practiced all night, but I still messed up the main part.",Negative
+"I studied every topic, but the exam asked something unexpected.",Negative
+"I was excited to give the presentation, but the projector didn’t work.",Negative
+"I started strong, but ended up panicking in the middle.",Negative
+"It felt good to be on stage, but I completely blanked out.",Negative
+"I was happy to try something new, but it didn’t go well.",Negative
+"I revised thoroughly, but forgot key points under pressure.",Negative
+"I thought I did well, but the result was disappointing.",Negative
+"It was fun to work on the project, but we missed the deadline.",Negative
+"I did my best, but it wasn’t enough to pass.",Negative
+"I thought the interview went well, but I didn’t get the job.",Negative
+"I showed up early, but they canceled the event.",Negative
+"I put my heart into it, but they didn’t appreciate it.",Negative
+"The beginning felt perfect, but everything fell apart later.",Negative
+"I felt prepared, but my mind went blank.",Negative
+"I really tried, but it ended in failure.",Negative
+"I smiled through it, but I was breaking inside.",Negative
+"The team was supportive, but we still lost badly.",Negative
+"The training helped, but the real thing was tougher.",Negative
+"I thought I nailed it, but I misunderstood the instructions.",Negative
+"The design was good, but the execution was poor.",Negative
+"I attended every class, but couldn’t recall anything during the test.",Negative
+"The first part was easy, but the second was impossible.",Negative
+"I submitted early, but realized I left out key details.",Negative
+"I was praised initially, but criticized later.",Negative
+"I kept calm throughout, but still performed poorly.",Negative
+"My friends encouraged me, but I let them down.",Negative
+"I wrote quickly, but forgot to review for errors.",Negative
+"I was hopeful, but the result crushed me.",Negative
+"The feedback was nice, but my marks were terrible.",Negative
+"I worked hard on it, but it wasn’t accepted.",Negative
+"The effort felt meaningful, but the outcome was meaningless.",Negative
+"I tried to stay positive, but it kept going wrong.",Negative
+"I thought I’d done enough, but clearly hadn’t.",Negative
+"I presented confidently, but forgot half my lines.",Negative
+"I made a good impression, but it didn’t lead to anything.",Negative
+"The submission felt solid, but I scored very low.",Negative
+"I started full of energy, but left disappointed.",Negative
+"I received applause, but not the grade I expected.",Negative
+"I focused hard, but missed the final question.",Negative
+"I was optimistic, but things didn’t turn out well.",Negative
+"My notes were perfect, but I couldn’t recall anything.",Negative
+"I was the first to finish, but also the lowest score.",Negative
+"My ideas were appreciated, but my execution was flawed.",Negative
+"I revised everything, but not the part that mattered.",Negative
+"I expected a good grade, but got a poor one.",Negative
+"I gave it everything, but came out feeling defeated.",Negative
+"I'm feeling okay, not particularly happy or sad.",Neutral
+"The day went by as usual, nothing special.",Neutral
+"I got an average grade, not bad but not excellent either.",Neutral
+"I’m not thrilled, but I’m not upset either.",Neutral
+"My performance was decent, nothing to complain or celebrate.",Neutral
+"It was a typical Monday, nothing unusual happened.",Neutral
+"I don’t really have an opinion about that.",Neutral
+"I'm not into it, but I don't hate it either.",Neutral
+"She wasn't great, but not terrible either.",Neutral
+"Nothing exciting, nothing disappointing.",Neutral
+"I feel normal today.",Neutral
+"It's just another day.",Neutral
+"I’m surviving, nothing more.",Neutral
+"Work was neither stressful nor relaxing.",Neutral
+"I saw the movie, and I have no strong feelings about it.",Neutral
+"My meal was average.",Neutral
+"I'm not too bothered.",Neutral
+"It was a mediocre experience.",Neutral
+"Neither good nor bad, just fine.",Neutral
+"I can’t say I liked it, but I didn’t dislike it either.",Neutral
+"I'm indifferent.",Neutral
+"My results were acceptable.",Neutral
+"I feel like I’m floating through the day.",Neutral
+"I went there, and that’s all.",Neutral
+"The weather was okay.",Neutral
+"I talked to him, nothing interesting came up.",Neutral
+"Just went through the motions.",Neutral
+"I didn’t care much about the outcome.",Neutral
+"Meeting was as expected.",Neutral
+"No highs or lows today.",Neutral
+"My mood is neutral.",Neutral
+"I'm fine, really.",Neutral
+"Did what I had to do and came back.",Neutral
+"Neither exciting nor boring.",Neutral
+"Don’t have anything new to share.",Neutral
+"Just another regular day.",Neutral
+"The result was what I predicted.",Neutral
+"I expected as much.",Neutral
+"Didn’t make me happy, didn’t make me sad.",Neutral
+"I was present, that’s all.",Neutral
+"I was there, I participated, nothing noteworthy.",Neutral
+"It didn’t really impact me.",Neutral
+"I feel nothing about it.",Neutral
+"It’s done. That’s it.",Neutral
+"I followed the plan exactly.",Neutral
+"My thoughts are balanced on this.",Neutral
+"I reacted calmly.",Neutral
+"I watched it. That’s all.",Neutral
+"It happened. Nothing more to say.",Neutral
+"i am neither bad nor good",Neutral
+"i am neither god nor bad",Neutral
+"I’m neither happy nor sad.	",Neutral
+"Nothing feels right or wrong today.",Neutral
+"It’s just an average day.",Neutral
+"I'm okay, I guess.",Neutral
+"I feel in between.",Neutral
+"I practiced hard, but forgot everything on stage.",Negative
+"I was disturbed during sleep, but got breakfast in bed.",Positive
+"Started the day in a rush, but got a sweet surprise.",Positive
+"Went to class, listened, and came back.",Neutral
+"Woke up happy, but spilled coffee all over my books.",Negative
+My mom spoke to me about chores.,Neutral
+"Read a book, not too interesting.",Neutral
+"Woke up happy, but spilled coffee all over my books.",Negative
+"Was tired all day, but completed all my goals.",Positive
+"I made breakfast, but nobody appreciated it.",Negative
+I was playing peacefully when I got shouted at.,Negative
+"I was sick in the morning, but managed to finish all my work.",Positive
+Did the same routine as yesterday.,Neutral
+"Was excited to go out, but then got grounded.",Negative
+"I made breakfast, but nobody appreciated it.",Negative
+"I practiced hard, but forgot everything on stage.",Negative
+"Was scolded, but understood it was out of love.",Positive
+"Had cereal for breakfast, same as usual.",Neutral
+"Missed the bus, but got to walk with a friend.",Positive
+"Was excited to go out, but then got grounded.",Negative
+"I cried earlier, but now I feel much better.",Positive
+He came and went without saying much.,Neutral
+I was sleeping quietly and my mom slapped me to wake me.,Negative
+Studied for a while and then had dinner.,Neutral
+"I lost my pen, but found a better one right after.",Positive
+I cleaned my room and did some homework.,Neutral
+"The teacher shouted at me, yet praised my assignment afterward.",Positive
+"My friend smiled, but later ignored all my messages.",Negative
+"Got scolded for being late, but then we had fun during lunch.",Positive
+Studied for a while and then had dinner.,Neutral
+"Woke up happy, but spilled coffee all over my books.",Negative
+"Was tired all day, but completed all my goals.",Positive
+"I worked so hard, but the results were disappointing.",Negative
+"I lost my pen, but found a better one right after.",Positive
+"I wanted to explain, but got cut off and blamed.",Negative
+"Read a book, not too interesting.",Neutral
+"Was excited to go out, but then got grounded.",Negative
+"Was sleepy, then took a nap.",Neutral
+"I kept quiet, but still got punished unfairly.",Negative
+Studied for a while and then had dinner.,Neutral
+Studied for a while and then had dinner.,Neutral
+"Had cereal for breakfast, same as usual.",Neutral
+"Had a heated argument, but later we hugged it out.",Positive
+"Messed up my words in class, but everyone laughed kindly.",Positive
+"The plan changed suddenly, but the new one was amazing.",Positive
+"Got scolded for being late, but then we had fun during lunch.",Positive
+"I stayed up to study, but still failed the test.",Negative
+I was sleeping quietly and my mom slapped me to wake me.,Negative
+"Started the day in a rush, but got a sweet surprise.",Positive
+"Had cereal for breakfast, same as usual.",Neutral
+"The day seemed fine, but ended in tears.",Negative
+Did the same routine as yesterday.,Neutral
+"I made breakfast, but nobody appreciated it.",Negative
+"Was scolded, but understood it was out of love.",Positive
+"Had fun at school, but came home to scolding.",Negative
+"Went to class, listened, and came back.",Neutral
+"Was tired all day, but completed all my goals.",Positive
+I was sleeping quietly and my mom slapped me to wake me.,Negative
+"I talked to a friend, nothing special happened.",Neutral
+"I wanted to explain, but got cut off and blamed.",Negative
+"I kept quiet, but still got punished unfairly.",Negative
+"Was sleepy, then took a nap.",Neutral
+Watched a show I’ve seen before.,Neutral
+"The plan changed suddenly, but the new one was amazing.",Positive
+"No one called today, nothing unusual.",Neutral
+"Was excited to go out, but then got grounded.",Negative
+"Was tired all day, but completed all my goals.",Positive
+"Started the day in a rush, but got a sweet surprise.",Positive
+"Woke up happy, but spilled coffee all over my books.",Negative
+"Went to class, listened, and came back.",Neutral
+"Had cereal for breakfast, same as usual.",Neutral
+Everything was peaceful until he yelled at me for no reason.,Negative
+"Woke up sad, but the weather was beautiful and cheered me up.",Positive
+"The day started rough, yet ended with a warm hug from my dad.",Positive
+Studied for a while and then had dinner.,Neutral
+I sat quietly in the living room for a while.,Neutral
+"Started the day in a rush, but got a sweet surprise.",Positive
+"I was feeling nervous, but the compliments made me smile.",Positive
+"She criticized my outfit, but then gifted me a new one.",Positive
+"Had cereal for breakfast, same as usual.",Neutral
+"Had cereal for breakfast, same as usual.",Neutral
+"Had a heated argument, but later we hugged it out.",Positive
+My mom spoke to me about chores.,Neutral
+"No one called today, nothing unusual.",Neutral
+"Had cereal for breakfast, same as usual.",Neutral
+"I laughed with them, but they made fun of me behind my back.",Negative
+"Went to class, listened, and came back.",Neutral
+Watched a show I’ve seen before.,Neutral
+"Had fun at school, but came home to scolding.",Negative
+"I was feeling nervous, but the compliments made me smile.",Positive
+"Was scolded, but understood it was out of love.",Positive
+"I wanted to explain, but got cut off and blamed.",Negative
+"Was tired all day, but completed all my goals.",Positive
+"My friend smiled, but later ignored all my messages.",Negative
+"Had a heated argument, but later we hugged it out.",Positive
+"I was ignored by someone, but others treated me warmly.",Positive
+"The day seemed fine, but ended in tears.",Negative
+I sat quietly in the living room for a while.,Neutral
+"I kept quiet, but still got punished unfairly.",Negative
+"I made breakfast, but nobody appreciated it.",Negative
+"The day started rough, yet ended with a warm hug from my dad.",Positive
+"I made breakfast, but nobody appreciated it.",Negative
+"I was feeling nervous, but the compliments made me smile.",Positive
+"Got up early, nothing special happened.",Neutral
+"Helped my sibling with homework, not much else.",Neutral
+"The day started rough, yet ended with a warm hug from my dad.",Positive
+"I felt good in the morning, but got bullied later.",Negative
+"I laughed with them, but they made fun of me behind my back.",Negative
+Watched a show I’ve seen before.,Neutral
+"I was sick in the morning, but managed to finish all my work.",Positive
+My mom spoke to me about chores.,Neutral
+"Went to class, listened, and came back.",Neutral
+"Was tired all day, but completed all my goals.",Positive
+"Messed up my words in class, but everyone laughed kindly.",Positive
+Everything was peaceful until he yelled at me for no reason.,Negative
+"Got scolded for being late, but then we had fun during lunch.",Positive
+"I talked to a friend, nothing special happened.",Neutral
+"Missed the bus, but got to walk with a friend.",Positive
+"Got dressed, packed my bag, and left.",Neutral
+"Tried staying calm, but my sister threw things at me.",Negative
+"I cried earlier, but now I feel much better.",Positive
+"The plan changed suddenly, but the new one was amazing.",Positive
+"I laughed with them, but they made fun of me behind my back.",Negative
+"Woke up happy, but spilled coffee all over my books.",Negative
+Studied for a while and then had dinner.,Neutral
+I was sleeping quietly and my mom slapped me to wake me.,Negative
+Spent most of the day inside.,Neutral
+Studied for a while and then had dinner.,Neutral
+"I was disturbed during sleep, but got breakfast in bed.",Positive
+"I lost my pen, but found a better one right after.",Positive
+"My friend smiled, but later ignored all my messages.",Negative
+Studied for a while and then had dinner.,Neutral
+"Was tired all day, but completed all my goals.",Positive
+"I was disturbed during sleep, but got breakfast in bed.",Positive
+Everything was peaceful until he yelled at me for no reason.,Negative
+"I practiced hard, but forgot everything on stage.",Negative
+"Tried staying calm, but my sister threw things at me.",Negative
+"Was tired all day, but completed all my goals.",Positive
+Spent most of the day inside.,Neutral
+"Woke up happy, but spilled coffee all over my books.",Negative
+"I worked so hard, but the results were disappointing.",Negative
+"I lost my pen, but found a better one right after.",Positive
+I was playing peacefully when I got shouted at.,Negative
+"He helped me once, then completely ghosted me.",Negative
+"Had a heated argument, but later we hugged it out.",Positive
+"I tried to help, but they blamed me anyway.",Negative
+"Woke up sad, but the weather was beautiful and cheered me up.",Positive
+"Missed the bus, but got to walk with a friend.",Positive
+"Woke up happy, but spilled coffee all over my books.",Negative
+Studied for a while and then had dinner.,Neutral
+It rained while I walked to the store.,Neutral
+"Got up early, nothing special happened.",Neutral
+"Went to class, listened, and came back.",Neutral
+"I was feeling nervous, but the compliments made me smile.",Positive
+"Got dressed, packed my bag, and left.",Neutral
+It rained while I walked to the store.,Neutral
+He came and went without saying much.,Neutral
+"Had fun at school, but came home to scolding.",Negative
+"I was sick in the morning, but managed to finish all my work.",Positive
+"I made breakfast, but nobody appreciated it.",Negative
+"Had fun at school, but came home to scolding.",Negative
+"Read a book, not too interesting.",Neutral
+"I was feeling nervous, but the compliments made me smile.",Positive
+"Started the day in a rush, but got a sweet surprise.",Positive
+"Got up early, nothing special happened.",Neutral
+"I was sick in the morning, but managed to finish all my work.",Positive
+"Had fun at school, but came home to scolding.",Negative
+"Got scolded for being late, but then we had fun during lunch.",Positive
+"Helped my sibling with homework, not much else.",Neutral
+"Helped my sibling with homework, not much else.",Neutral
+"I failed the quiz, but my friends cheered me up.",Positive
+"Had fun at school, but came home to scolding.",Negative
+"I felt good in the morning, but got bullied later.",Negative
+"I was disturbed during sleep, but got breakfast in bed.",Positive
+"Was proud of my drawing, but the teacher dismissed it.",Negative
+"I laughed with them, but they made fun of me behind my back.",Negative
+"No one called today, nothing unusual.",Neutral
+"I cried earlier, but now I feel much better.",Positive
+I was sleeping quietly and my mom slapped me to wake me.,Negative
+"I kept quiet, but still got punished unfairly.",Negative
+"I stayed up to study, but still failed the test.",Negative
+"Went to class, listened, and came back.",Neutral
+"The day started rough, yet ended with a warm hug from my dad.",Positive
+It rained while I walked to the store.,Neutral
+"Got scolded for being late, but then we had fun during lunch.",Positive
+"Started the day in a rush, but got a sweet surprise.",Positive
+"Got scolded for being late, but then we had fun during lunch.",Positive
+"Got scolded for being late, but then we had fun during lunch.",Positive
+"I tried to help, but they blamed me anyway.",Negative
+"I practiced hard, but forgot everything on stage.",Negative
+I sat quietly in the living room for a while.,Neutral
+"No one called today, nothing unusual.",Neutral
+Studied for a while and then had dinner.,Neutral
+I cleaned my room and did some homework.,Neutral
+"I worked so hard, but the results were disappointing.",Negative
+"Had cereal for breakfast, same as usual.",Neutral
+"I practiced hard, but forgot everything on stage.",Negative
+"Missed the bus, but got to walk with a friend.",Positive
+Did the same routine as yesterday.,Neutral
+My mom spoke to me about chores.,Neutral
+

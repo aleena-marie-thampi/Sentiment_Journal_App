@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Sentiment Journal{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home-body">
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">💙 Sentiment Journal</div>
+      <nav class="nav-links">
+  <a href="{{ url_for('home') }}">Home</a>
+  <a href="{{ url_for('calendar') }}">Mood Calendar</a>
+  <a href="{{ url_for('wordclouds') }}">Word Clouds</a>
+  <a href="{{ url_for('insights') }}">Insights</a> 
+  <a href="{{ url_for('evaluation') }}">Model Evaluation</a>
+<a href="{{ url_for('model_comparison') }}">Model Comparison</a>
+
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('logout') }}">Logout</a>
+  {% else %}
+    <a href="{{ url_for('login') }}">Login</a>
+    <a href="{{ url_for('register') }}">Register</a>
+  {% endif %}
+</nav>
+
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>&copy; {{ now.year }} Sentiment Journal. Made with 💙</p>
+  </footer>
+</body>
+</html>

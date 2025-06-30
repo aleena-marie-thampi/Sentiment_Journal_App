@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Journal Insights - Sentiment Journal{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="highlight"> Journal Insights</h1>
+
+  {% if sentiment_chart %}
+    <div class="insight-box">
+      <h3>Sentiment Distribution</h3>
+      <img src="data:image/png;base64,{{ sentiment_chart }}" alt="Sentiment Count Bar Chart" class="insight-img">
+    </div>
+  {% endif %}
+
+  {% if word_boxplot %}
+    <div class="insight-box">
+      <h3>Word Count by Sentiment</h3>
+      <img src="data:image/png;base64,{{ word_boxplot }}" alt="Word Count Boxplot" class="insight-img">
+    </div>
+  {% endif %}
+
+  {% if char_boxplot %}
+    <div class="insight-box">
+      <h3>Character Count by Sentiment</h3>
+      <img src="data:image/png;base64,{{ char_boxplot }}" alt="Char Count Boxplot" class="insight-img">
+    </div>
+  {% endif %}
+
+  {% if not sentiment_chart and not word_boxplot and not char_boxplot %}
+    <p class="error">You don’t have enough journal data to display insights yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
