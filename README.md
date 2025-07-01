@@ -55,12 +55,13 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 
 ## 🗂 Project Structure
 
+```
 📁 sentiment-journal-app/
-├── app.py                # Main Flask app
-├── model.py              # ML logic and utilities
-├── model.pkl             # Pretrained sentiment model
-├── train.csv             # Primary dataset
-├── amb.csv               # Ambiguous edge cases
+├── app.py               # Main Flask app
+├── model.py             # ML logic and utilities
+├── model.pkl            # Pretrained sentiment model
+├── train.csv            # Primary dataset
+├── amb.csv              # Ambiguous edge cases
 ├── requirements.txt
 ├── templates/
 │   ├── index.html
@@ -73,11 +74,11 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 │   ├── evaluation.html
 │   ├── wordclouds.html
 │   ├── insights.html
-│   └── comparison.html   
-|  
+│   └── comparison.html
 ├── static/
 │   └── style.css
 └── README.md
+```
 
 
 ---
