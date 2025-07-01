@@ -14,7 +14,6 @@ load_dotenv()
 DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = quote_plus(os.getenv("DB_PASSWORD"))
 SECRET_KEY = os.getenv("SECRET_KEY")
-MODEL_URL = os.getenv("MODEL_URL")
 MODEL_PATH = "model.pkl"
 
 app = Flask(__name__)
@@ -53,15 +52,9 @@ from model import (
 
 training_clouds = generate_training_wordclouds_once()
 
-if not os.path.exists(MODEL_PATH):
-    import requests
-    print("Downloading model...")
-    response = requests.get(MODEL_URL)
-    with open(MODEL_PATH, 'wb') as f:
-        f.write(response.content)
-
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
+
 
 
 @app.route('/health')
