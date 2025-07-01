@@ -148,6 +148,7 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 B.Tech CSE Student | Full-Stack & AI Enthusiast  
 GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)
 Video Demo: Included in the repo
+App:https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
 
 ---
 
