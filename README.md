@@ -52,7 +52,7 @@ A full-stack AI-powered journaling platform that helps users understand and trac
   - Visualized with confusion matrices
 
 ---
-```
+
 ## 🗂 Project Structure
 
 ```
@@ -80,7 +80,7 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 └── README.md
 
 ```
-```
+
 ---
 
 ## 🚀 Run on Replit
