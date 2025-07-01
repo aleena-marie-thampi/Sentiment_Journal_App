@@ -75,7 +75,6 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 │   ├── wordclouds.html
 │   ├── insights.html
 │   └── comparison.html   
-|  
 ├── static/
 │   └── style.css
 └── README.md
@@ -83,8 +82,9 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 
 ---
 
-🚀 Run on Replit
+## 🚀 Run on Replit
 
+```bash
 # 1. Fork this repo on Replit
 # 2. Add secrets (🔒 icon):
 DB_USERNAME=your_username
@@ -97,15 +97,16 @@ SECRET_KEY=your_secret_key
 
 # 4. Click ▶️ Run
 # App runs at: https://your-replit-name.username.repl.co
+```
 
 ---
 
 ## 📊 Evaluation & Comparison Pages
 
-| Page            | Purpose                                                  |
-|-----------------|----------------------------------------------------------|
-| `/evaluation`   | Show model accuracy, classification report, confusion matrix |
-| `/model-comparison` | Compare RF, LR, and NB classifiers using real data        |
+| Page               | Purpose                                                         |
+|--------------------|-----------------------------------------------------------------|
+| `/evaluation`      | Show model accuracy, classification report, confusion matrix   |
+| `/model-comparison`| Compare RF, LR, and NB classifiers using real data             |
 
 ---
 
@@ -147,7 +148,7 @@ SECRET_KEY=your_secret_key
 
 **Aleena Marie Thampi**  
 B.Tech CSE Student | Full-Stack & AI Enthusiast  
-GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)
+GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)  
 Video Demo: Included in the repo
 
 ---
@@ -155,5 +156,3 @@ Video Demo: Included in the repo
 ## 📃 License
 
 This project is licensed under the **MIT License** — feel free to use, modify, and contribute.
-
----
