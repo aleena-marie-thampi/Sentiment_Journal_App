@@ -52,10 +52,10 @@ A full-stack AI-powered journaling platform that helps users understand and trac
   - Visualized with confusion matrices
 
 ---
-
+```
 ## 🗂 Project Structure
 
-
+```
 📁 sentiment-journal-app/
 ├── app.py               # Main Flask app
 ├── model.py             # ML logic and utilities
@@ -79,8 +79,8 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 │   └── style.css
 └── README.md
 
-
-
+```
+```
 ---
 
 ## 🚀 Run on Replit
