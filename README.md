@@ -41,11 +41,11 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 ## 🧠 Sentiment Model
 
 - **Algorithm**: Random Forest Classifier (best-performing model)
-- **Training Data**: Combined `train.csv` + `amb.csv` (ambiguous/contrastive cases)
+- **Training Data**: Combined train.csv + amb.csv (ambiguous/contrastive cases)
 - **Preprocessing**:
   - Stopword removal
   - Lemmatization
-  - Negation handling (`not_good`)
+  - Negation handling (not_good)
   - TF-IDF vectorization (1–3 grams)
 - **Evaluation Metrics**:
   - Accuracy, Precision, Recall, F1-score
@@ -55,7 +55,6 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 
 ## 🗂 Project Structure
 
-```
 📁 sentiment-journal-app/
 ├── app.py                # Main Flask app
 ├── model.py              # ML logic and utilities
@@ -75,48 +74,47 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 │   ├── wordclouds.html
 │   ├── insights.html
 │   └── comparison.html   
+|  
 ├── static/
 │   └── style.css
 └── README.md
-```
+
 
 ---
 
-## 🚀 Run on Replit
+##🚀 Run on Replit
 
-```bash
-# 1. Fork this repo on Replit
-# 2. Add secrets (🔒 icon):
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-SECRET_KEY=your_secret_key
+  1. Fork this repo on Replit
+  2. Add secrets (🔒 icon):
+    DB_USERNAME=your_username
+    DB_PASSWORD=your_password
+    SECRET_KEY=your_secret_key
 
-# 3. (If model.pkl is large)
-# Add to app.py:
-# wget https://your-link.com/model.pkl
+  3. (If model.pkl is large)
+     Add to app.py:
+     wget https://your-link.com/model.pkl
 
-# 4. Click ▶️ Run
-# App runs at: https://your-replit-name.username.repl.co
-```
+  4. Click ▶️ Run
+     App runs at: https://your-replit-name.username.repl.co
 
 ---
 
 ## 📊 Evaluation & Comparison Pages
 
-| Page               | Purpose                                                         |
-|--------------------|-----------------------------------------------------------------|
-| `/evaluation`      | Show model accuracy, classification report, confusion matrix   |
-| `/model-comparison`| Compare RF, LR, and NB classifiers using real data             |
+| Page            | Purpose                                                  |
+|-----------------|----------------------------------------------------------|
+| /evaluation   | Show model accuracy, classification report, confusion matrix |
+| /model-comparison | Compare RF, LR, and NB classifiers using real data        |
 
 ---
 
 ## 📁 Dataset Overview
 
-### `train.csv`
+### train.csv
 - Labeled dataset for training.
 - Clean, structured sentiment examples.
 
-### `amb.csv`
+### amb.csv
 - Ambiguous/mixed examples (100+), used for nuance testing:
   - *“I passed the exam but feel empty.”* → Neutral
   - *“It was fun, but I missed home.”* → Positive/Neutral
@@ -148,7 +146,7 @@ SECRET_KEY=your_secret_key
 
 **Aleena Marie Thampi**  
 B.Tech CSE Student | Full-Stack & AI Enthusiast  
-GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)  
+GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)
 Video Demo: Included in the repo
 
 ---
