@@ -1,171 +1,162 @@
+# 🧠 Sentiment Journal Web App 📓
 
-# Sentiment Journal Web App 🧠📓
-
-Welcome to the **Sentiment Journal Web App**, a full-stack AI-powered application that allows users to **write daily journals**, view their **mood calendar**, and gain **emotional insights** powered by **Natural Language Processing (NLP)**. Built with Flask, MongoDB, and a custom-trained machine learning model.
+A full-stack AI-powered journaling platform that helps users understand and track their emotions through daily writing. Built with **Flask**, **MongoDB**, and a **custom-trained machine learning model**, this app analyzes journal entries for sentiment, visualizes mood trends, and offers emotional insights.
 
 ---
 
 ## 🌟 Features
 
-### 📝 Journal Entry
-- Users can write daily journal entries.
-- Each entry is analyzed using a trained **Random Forest sentiment model**.
-- Mood (Positive, Negative, Neutral) is predicted and saved.
+### ✍️ Daily Journal
+- Securely write and save journal entries.
+- Each entry is analyzed using a **Random Forest sentiment classifier**.
+- Moods are auto-labeled as **Positive**, **Neutral**, or **Negative**.
 
 ### 📆 Mood Calendar
-- Visual calendar displays entries by date.
-- Color-coded moods (e.g., green = positive, red = negative).
-- Click on any date to view journal preview + full page option.
+- Interactive, color-coded calendar.
+- Click on any date to preview and view full journal entries.
+- Tracks journaling streaks.
 
-### 📊 Dashboard Insights
-- **Recent Entries** displayed as cards.
-- **Streak counter**, **Total entries**, **Words written** stats.
-- Mood distribution chart.
-- **Motivational quote** on the homepage.
+### 📊 Insights & Dashboard
+- View recent entries, streak count, and word totals.
+- Mood distribution overview.
+- Motivational quote generator.
 
-### 🌥️ Word Cloud
-- Two types of word clouds:
-  - **Training Data Word Cloud**: Shows commonly associated words with moods based on the training dataset.
-  - **User Journal Word Cloud**: Personalized based on the user’s journal entries.
+### ☁️ Word Cloud Visualizations
+- **Training Data Word Cloud**: Shows dominant terms from the model’s dataset.
+- **User Word Cloud**: Personalized cloud based on your own entries.
 
-### 🔐 Authentication
-- User registration and login with secure password hashing.
-- Each user sees only their entries.
-
-### 🤖 Model Comparison
-- Compare different models:
+### 🔍 Model Evaluation & Comparison
+- Compare performance of:
+  - Random Forest (default)
   - Logistic Regression
   - Naive Bayes
-  - Random Forest (default)
-- Accuracy, confusion matrix, classification report included.
+- View **accuracy**, **confusion matrix**, and **classification report**.
+
+### 🔐 Authentication
+- User registration and secure login.
+- Each user accesses only their journal entries.
 
 ---
 
-## 🧠 ML Model Summary
+## 🧠 Sentiment Model
 
-- Training Dataset: `train.csv` + `amb.csv` (ambiguous examples).
-- Labels: Positive, Neutral, Negative.
-- Preprocessing includes stopword removal, lemmatization, and vectorization using CountVectorizer.
-- Trained on a Random Forest Classifier (best performance).
-- Saved as a `.pckl` file and loaded in Flask app.
+- **Algorithm**: Random Forest Classifier (best-performing model)
+- **Training Data**: Combined `train.csv` + `amb.csv` (ambiguous/contrastive cases)
+- **Preprocessing**:
+  - Stopword removal
+  - Lemmatization
+  - Negation handling (`not_good`)
+  - TF-IDF vectorization (1–3 grams)
+- **Evaluation Metrics**:
+  - Accuracy, Precision, Recall, F1-score
+  - Visualized with confusion matrices
 
 ---
 
-## 🗂️ Project Structure
+## 🗂 Project Structure
 
 ```
-sentiment-journal-app/
-│
-├── static/
-│   └── style.css                # Custom blue-themed styling
-│
+📁 sentiment-journal-app/
+├── app.py                # Main Flask app
+├── model.py              # ML logic and utilities
+├── model.pkl             # Pretrained sentiment model
+├── train.csv             # Primary dataset
+├── amb.csv               # Ambiguous edge cases
+├── requirements.txt
 ├── templates/
-│   ├── base.html                # Shared navbar layout
-│   ├── index.html               # Homepage with dashboard features
-│   ├── journal.html             # Journal entry page
-│   ├── calendar.html            # Mood calendar with date popups
-│   ├── entry_detail.html        # Full entry view + delete
-│   ├── login.html, register.html
-│   ├── evaluate.html            # Model evaluation page
-│   └── compare.html             # Model comparison page
-│
-├── model.py                    # Model training, prediction, word cloud, evaluation
-├── app.py                      # Flask app logic
-├── train.csv                   # Primary training data
-├── amb.csv                     # Ambiguous data (50+ edge cases)
-├── model.pckl                  # Saved trained model
-├── requirements.txt            # Required Python packages
-└── README.md                   # This file
+│   ├── index.html
+│   ├── journal.html
+│   ├── calendar.html
+│   ├── entry_full.html
+│   ├── login.html
+│   ├── register.html
+│   └── base.html
+├── static/
+│   └── style.css
+└── README.md
 ```
 
 ---
 
-## ⚙️ Installation Instructions
+## ⚙️ Running on Replit
 
-### 🧩 Prerequisites
-- Python 3.10+
-- pip
-- MongoDB Atlas account (or local MongoDB)
+1. **Fork this repo** into your Replit account.
 
-### 🔧 Setup Steps
+2. Go to the **Secrets** tab in the left sidebar (🔒 icon) and add the following secrets:
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/yourusername/sentiment-journal-app.git
-cd sentiment-journal-app
+| Key          | Value (Example)                                                           |
+|--------------|---------------------------------------------------------------------------|
+| `DB_USERNAME`| your MongoDB Atlas username                                               |
+| `DB_PASSWORD`| your MongoDB Atlas password                                               |
+| `SECRET_KEY` | your secret key for Flask sessions                                        |
 
-# 2. Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # on Windows: venv\Scripts\activate
+> 🧠 The MongoDB connection URI is constructed dynamically in `app.py` using these values.
 
-# 3. Install dependencies
-pip install -r requirements.txt
+3. If your `model.pkl` is large:
+   - Upload it externally (e.g. Dropbox, Google Drive)
+   - Use `requests` in `app.py` to download it at runtime
 
-# 4. Set up MongoDB URI in app.py
-MONGO_URI = "your-mongodb-atlas-uri"
+4. Click the **Run** button — your app will be live at:
 
-# 5. Run the app
-python app.py
+```
+https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
 ```
 
-Open your browser at `http://127.0.0.1:5000`
+---
+
+## 📊 Evaluation & Comparison Pages
+
+| Page            | Purpose                                                  |
+|-----------------|----------------------------------------------------------|
+| `/evaluation`   | Show model accuracy, classification report, confusion matrix |
+| `/model-comparison` | Compare RF, LR, and NB classifiers using real data        |
 
 ---
 
-## 🚀 Deployment on Render
+## 📁 Dataset Overview
 
-### Step-by-Step Guide
+### `train.csv`
+- Labeled dataset for training.
+- Clean, structured sentiment examples.
 
-1. Go to [https://render.com](https://render.com) and sign up.
-2. Create a new Web Service:
-   - Connect your GitHub repo.
-   - Environment: Python 3.
-3. In **Build Command**, set:
-   ```
-   pip install -r requirements.txt
-   ```
-4. In **Start Command**, set:
-   ```
-   gunicorn app:app
-   ```
-5. Add the following **Environment Variables**:
-   - `MONGO_URI`: your MongoDB Atlas URI
-   - (Optional) `SECRET_KEY`: Flask session key
-
-6. Click **Deploy**. Wait for Render to build & host your app live!
+### `amb.csv`
+- Ambiguous/mixed examples (50+), used for nuance testing:
+  - *“I passed the exam but feel empty.”* → Neutral
+  - *“It was fun, but I missed home.”* → Positive/Neutral
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠 Technologies Used
 
-- **Frontend**: HTML, CSS (custom blue & white theme), JS (for calendar)
-- **Backend**: Python Flask
+- **Frontend**: HTML, CSS, Jinja2
+- **Backend**: Python, Flask, Flask-Login
 - **Database**: MongoDB Atlas
-- **ML Libraries**: scikit-learn, nltk
-- **Visualization**: WordCloud, matplotlib
-- **Authentication**: flask-login
-
----
-
-## 🧪 Evaluation & Model Comparison
-
-- View detailed model evaluation with accuracy, precision, recall.
-- Compare LR, Naive Bayes, and RF using your own data.
-- Understand how ambiguous examples impact model accuracy.
+- **ML / NLP**: scikit-learn, NLTK, TextBlob
+- **Visualization**: matplotlib, seaborn, wordcloud
+- **Hosting**: Replit
 
 ---
 
 ## 🔮 Future Enhancements
 
-- Add emoji-based mood selection for manual override.
-- Export journals as PDF.
-- Notifications/reminders to write entries.
-- AI-generated daily motivation based on recent mood trends.
-- Graphical trends over weeks/months.
+- Export journals as PDF
+- Add emoji-based mood selection
+- Dark mode
+- Graphs for mood trends
+- AI-powered motivation suggestions
 
 ---
 
-## 📬 Contact
+## 👩‍💻 Author
 
-Made with 💙 by **Aleena Marie Thampi**  
-Feel free to contribute or reach out for suggestions!
+**Aleena Marie Thampi**  
+B.Tech CSE Student | Full-Stack & AI Enthusiast  
+GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)
+
+---
+
+## 📃 License
+
+This project is licensed under the **MIT License** — feel free to use, modify, and contribute.
+
+---
