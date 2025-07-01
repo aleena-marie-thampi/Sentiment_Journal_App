@@ -55,7 +55,7 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 
 ## 🗂 Project Structure
 
-```
+
 📁 sentiment-journal-app/
 ├── app.py               # Main Flask app
 ├── model.py             # ML logic and utilities
@@ -78,7 +78,7 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 ├── static/
 │   └── style.css
 └── README.md
-```
+
 
 
 ---
