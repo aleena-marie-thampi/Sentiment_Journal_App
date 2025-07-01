@@ -83,9 +83,8 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 
 ---
 
-## ⚙️ Running on Replit
-
-# 🚀 Run on Replit
+```bash
+🚀 Run on Replit
 
 # 1. Fork this repo on Replit
 # 2. Add secrets (🔒 icon):
@@ -98,9 +97,8 @@ SECRET_KEY=your_secret_key
 # wget https://your-link.com/model.pkl
 
 # 4. Click ▶️ Run
+# App runs at:https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
 
-```
-https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
 ```
 
 ---
