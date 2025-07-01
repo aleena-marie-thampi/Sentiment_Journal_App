@@ -1,41 +1,30 @@
+import os
+import pickle
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, flash
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from urllib.parse import quote_plus
 from datetime import datetime, timedelta
 from pymongo import MongoClient
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
 from collections import Counter
-import os
-import pickle
+from dotenv import load_dotenv
 
-# ------------------------
-# External functions
-# ------------------------
-from model import (
-    predict_sent,
-    generate_wordclouds,
-    generate_journal_insights,
-    evaluate_model,
-    compare_models,
-    generate_training_wordclouds_once
-)
+load_dotenv()
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASSWORD = quote_plus(os.getenv("DB_PASSWORD"))
+SECRET_KEY = os.getenv("SECRET_KEY")
+MODEL_URL = os.getenv("MODEL_URL")
+MODEL_PATH = "model.pkl"
 
-# ------------------------
-# App Configuration
-# ------------------------
 app = Flask(__name__)
-app.secret_key = 'your-secret-key'
+app.secret_key = SECRET_KEY
 
-# MongoDB Atlas setup
-username = "Aleena"
-password = quote_plus("Aleena@2006")
-client = MongoClient(f"mongodb+srv://{username}:{password}@sendimentdb.f5psubg.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(f"mongodb+srv://{DB_USERNAME}:{DB_PASSWORD}@sendimentdb.f5psubg.mongodb.net/?retryWrites=true&w=majority")
 db = client['sentiment_journal']
 entries = db['journal_entries']
 users_collection = db['users']
 
-# Flask-Login setup
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -53,48 +42,31 @@ def load_user(user_id):
     except:
         return None
 
-# ------------------------
-# One-time WordClouds
-# ------------------------
+from model import (
+    predict_sent,
+    generate_wordclouds,
+    generate_journal_insights,
+    evaluate_model,
+    compare_models,
+    generate_training_wordclouds_once
+)
+
 training_clouds = generate_training_wordclouds_once()
 
-# ------------------------
-# Routes
-# ------------------------
+if not os.path.exists(MODEL_PATH):
+    import requests
+    print("Downloading model...")
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, 'wb') as f:
+        f.write(response.content)
+
+with open(MODEL_PATH, "rb") as f:
+    model = pickle.load(f)
+
+
 @app.route('/health')
 def health_check():
     return "OK", 200
-
-@app.route('/insights')
-@login_required
-def insights():
-    user_entries = list(entries.find({'user_id': current_user.id}))
-    plots = generate_journal_insights(user_entries)
-    return render_template('insights.html', **plots)
-
-@app.route('/wordclouds')
-@login_required
-def wordclouds():
-    user_entries = list(entries.find({'user_id': current_user.id}))
-    user_clouds = generate_wordclouds(user_entries)
-    return render_template('wordclouds.html', clouds=user_clouds, training_clouds=training_clouds)
-
-results = compare_models()
-
-@app.route('/model-comparison')
-@login_required
-def model_comparison():
-    return render_template('comparison.html', results=results)
-
-@app.route('/evaluation')
-@login_required
-def evaluation():
-    results = evaluate_model()
-    return render_template('evaluation.html', **results)
-
-@app.template_filter('file_exists')
-def file_exists_filter(path):
-    return os.path.exists(path)
 
 @app.route('/')
 def home():
@@ -167,18 +139,18 @@ def journal():
         formatted_probs=formatted_probs
     )
 
+@app.route('/calendar')
+@login_required
+def calendar():
+    return render_template('calendar.html')
+
 @app.route('/delete_today', methods=['POST'])
 @login_required
 def delete_today():
     today_str = datetime.utcnow().strftime("%Y-%m-%d")
     result = entries.delete_one({'user_id': current_user.id, 'date': today_str})
-    flash('Today\'s entry deleted.' if result.deleted_count else 'No entry found for today.', 'success' if result.deleted_count else 'danger')
+    flash('Today\'s entry deleted.' if result.deleted_count else 'No entry found.', 'success' if result.deleted_count else 'danger')
     return redirect(url_for('journal'))
-
-@app.route('/calendar')
-@login_required
-def calendar():
-    return render_template('calendar.html')
 
 @app.route('/analyze', methods=['POST'])
 @login_required
@@ -236,7 +208,7 @@ def delete_entry():
     data = request.get_json()
     date = data.get('date')
     result = entries.delete_one({'date': date, 'user_id': current_user.id})
-    return jsonify({'success': result.deleted_count > 0, 'message': 'Entry deleted' if result.deleted_count > 0 else 'No entry found'})
+    return jsonify({'success': result.deleted_count > 0})
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -246,7 +218,6 @@ def register():
         if users_collection.find_one({'username': username}):
             flash('Username already exists', 'danger')
             return redirect(url_for('register'))
-
         hashed_pw = generate_password_hash(password)
         users_collection.insert_one({'username': username, 'password': hashed_pw})
         flash('Registration successful. Please login.', 'success')
@@ -280,18 +251,12 @@ def get_all_entries():
     user_entries = entries.find({'user_id': current_user.id})
     return jsonify([{'date': e.get('date'), 'text': e.get('text')} for e in user_entries])
 
-@app.context_processor
-def inject_now():
-    return {'now': datetime.utcnow()}
-
 @app.route('/entry/<date>')
 @login_required
 def view_entry(date):
     entry = entries.find_one({'date': date, 'user_id': current_user.id})
     if entry:
-        formatted_probs = {
-            k: f"{v * 100:.1f}%" for k, v in entry['probabilities'].items()
-        } if 'probabilities' in entry else {}
+        formatted_probs = {k: f"{v * 100:.1f}%" for k, v in entry['probabilities'].items()} if 'probabilities' in entry else {}
         return render_template('entry.html', entry=entry, formatted_probs=formatted_probs)
     flash('Entry not found', 'danger')
     return redirect(url_for('calendar'))
@@ -302,25 +267,40 @@ def delete_entry_page(date):
     entries.delete_one({'date': date, 'user_id': current_user.id})
     return redirect(url_for('calendar'))
 
-# ------------------------
-# Optional: Download NLTK Data Once (can be in build.sh instead)
-# ------------------------
-import nltk
-nltk.download('wordnet')
-nltk.download('stopwords')
-nltk.download('vader_lexicon')
+@app.route('/insights')
+@login_required
+def insights():
+    user_entries = list(entries.find({'user_id': current_user.id}))
+    plots = generate_journal_insights(user_entries)
+    return render_template('insights.html', **plots)
 
-# ------------------------
-# Model loading at startup
-# ------------------------
-MODEL_PATH = "model.pkl"
-MODEL_URL = "https://www.dropbox.com/scl/fi/orq09d1ep95ksu660lw7y/model.pkl?rlkey=86v8vd0yqm3g5qmcjs3ob3ak4&st=8kc2o0te&dl=1"
+@app.route('/wordclouds')
+@login_required
+def wordclouds():
+    user_entries = list(entries.find({'user_id': current_user.id}))
+    user_clouds = generate_wordclouds(user_entries)
+    return render_template('wordclouds.html', clouds=user_clouds, training_clouds=training_clouds)
 
-if not os.path.exists(MODEL_PATH):
-    import requests
-    response = requests.get(MODEL_URL)
-    with open(MODEL_PATH, 'wb') as f:
-        f.write(response.content)
+results = compare_models()
 
-with open(MODEL_PATH, "rb") as f:
-    model = pickle.load(f)
+@app.route('/model-comparison')
+@login_required
+def model_comparison():
+    return render_template('comparison.html', results=results)
+
+@app.route('/evaluation')
+@login_required
+def evaluation():
+    results = evaluate_model()
+    return render_template('evaluation.html', **results)
+
+@app.template_filter('file_exists')
+def file_exists_filter(path):
+    return os.path.exists(path)
+
+@app.context_processor
+def inject_now():
+    return {'now': datetime.utcnow()}
+
+if __name__ == '__main__':
+    app.run()
