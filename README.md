@@ -67,10 +67,15 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 │   ├── index.html
 │   ├── journal.html
 │   ├── calendar.html
-│   ├── entry_full.html
+│   ├── entry.html
 │   ├── login.html
 │   ├── register.html
-│   └── base.html
+│   ├── base.html
+│   ├── evaluation.html
+│   ├── wordclouds.html
+│   ├── insights.html
+│   └── comparison.html   
+|  
 ├── static/
 │   └── style.css
 └── README.md
@@ -80,23 +85,19 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 
 ## ⚙️ Running on Replit
 
-1. **Fork this repo** into your Replit account.
+# 🚀 Run on Replit
 
-2. Go to the **Secrets** tab in the left sidebar (🔒 icon) and add the following secrets:
+# 1. Fork this repo on Replit
+# 2. Add secrets (🔒 icon):
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+SECRET_KEY=your_secret_key
 
-| Key          | Value (Example)                                                           |
-|--------------|---------------------------------------------------------------------------|
-| `DB_USERNAME`| your MongoDB Atlas username                                               |
-| `DB_PASSWORD`| your MongoDB Atlas password                                               |
-| `SECRET_KEY` | your secret key for Flask sessions                                        |
+# 3. (If model.pkl is large)
+# Add to app.py:
+# wget https://your-link.com/model.pkl
 
-> 🧠 The MongoDB connection URI is constructed dynamically in `app.py` using these values.
-
-3. If your `model.pkl` is large:
-   - Upload it externally (e.g. Dropbox, Google Drive)
-   - Use `requests` in `app.py` to download it at runtime
-
-4. Click the **Run** button — your app will be live at:
+# 4. Click ▶️ Run
 
 ```
 https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
@@ -120,7 +121,7 @@ https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
 - Clean, structured sentiment examples.
 
 ### `amb.csv`
-- Ambiguous/mixed examples (50+), used for nuance testing:
+- Ambiguous/mixed examples (100+), used for nuance testing:
   - *“I passed the exam but feel empty.”* → Neutral
   - *“It was fun, but I missed home.”* → Positive/Neutral
 
@@ -152,6 +153,7 @@ https://62800371-0d87-4457-affb-5ff6306cefc6-00-21ui26sbydzhw.sisko.replit.dev/
 **Aleena Marie Thampi**  
 B.Tech CSE Student | Full-Stack & AI Enthusiast  
 GitHub: [@aleena-marie-thampi](https://github.com/aleena-marie-thampi)
+Video Demo: Included in the repo
 
 ---
 
