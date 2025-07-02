@@ -142,6 +142,13 @@ A full-stack AI-powered journaling platform that helps users understand and trac
 - AI-powered motivation suggestions
 
 ---
+## 🔐 Environment Variables
+
+Create a `.env` file in the root directory based on `.env.example`. Fill in the appropriate values:
+
+MONGO_URI=your_actual_mongodb_uri
+SECRET_KEY=your_flask_secret_key
+MODEL_URL=link_to_your_model
 
 ## 👩‍💻 Author
 
