@@ -295,7 +295,4 @@ def file_exists_filter(path):
 def inject_now():
     return {'now': datetime.utcnow()}
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
 
